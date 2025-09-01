@@ -1,7 +1,6 @@
 package com.petstore.api.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.petstore.api.model.enums.OrderStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,21 +14,21 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class Order{
 
-	@JsonProperty("id")
-	private Integer id;
-
 	@JsonProperty("petId")
-	private Integer petId;
+	private int petId;
 
 	@JsonProperty("quantity")
-	private Integer quantity;
+	private int quantity;
+
+	@JsonProperty("id")
+	private int id;
 
 	@JsonProperty("shipDate")
 	private String shipDate;
 
-	@JsonProperty("status")
-	private OrderStatus status;
-
 	@JsonProperty("complete")
-	private Boolean complete;
+	private boolean complete;
+
+	@JsonProperty("status")
+	private String status;
 }
