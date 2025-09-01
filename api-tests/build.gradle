@@ -1,0 +1,28 @@
+plugins {
+    id 'java'
+    alias(libs.plugins.allure)
+}
+
+group = 'org.example'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation libs.jacksonDatabind
+    implementation libs.jacksonAnnotations
+    implementation libs.restAssured
+    implementation libs.logback.classic
+    implementation libs.slf4j.ext
+    implementation libs.javafaker
+    
+    testImplementation libs.junit.jupiter.api
+    testImplementation libs.junit.jupiter.engine
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+test {
+    useJUnitPlatform()
+}

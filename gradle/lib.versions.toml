@@ -1,0 +1,44 @@
+[versions]
+# --- JUNIT ---
+junit = "5.10.0"
+rest-assured = "5.5.0"
+allure = "2.11.2"
+jacksonDatabind = "2.18.0"
+logback = "1.5.18"
+slf4j = "2.0.16"
+javafaker = "1.0.2"
+
+
+[libraries]
+# https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
+# JUnit Jupiter is the API for writing tests using JUnit 5.
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
+# https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
+# Core package for the JUnit Jupiter test engine.
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+
+# https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
+# Easy objecst serialization
+jacksonDatabind = {module = "com.fasterxml.jackson.core:jackson-databind", version.ref = "jacksonDatabind"}
+# https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations
+# Jackson annotations
+jacksonAnnotations = {module = "com.fasterxml.jackson.core:jackson-annotations", version.ref = "jacksonDatabind"}
+
+# LOGGING
+# https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
+logback-classic = { module = "ch.qos.logback:logback-classic", version.ref = "logback" }
+# https://mvnrepository.com/artifact/ch.qos.logback/logback-core
+logback-core = { module = "ch.qos.logback:logback-core", version.ref = "logback" }
+# https://mvnrepository.com/artifact/org.slf4j/slf4j-ext
+slf4j-ext = { module = "org.slf4j:slf4j-ext", version.ref = "slf4j" }
+
+# https://mvnrepository.com/artifact/io.rest-assured/rest-assured
+# Java DSL for easy testing of REST services
+restAssured = { module = "io.rest-assured:rest-assured", version.ref = "rest-assured" }
+
+# https://mvnrepository.com/artifact/com.github.javafaker/javafaker
+# Java library for generating fake data
+javafaker = { module = "com.github.javafaker:javafaker", version.ref = "javafaker" }
+
+[plugins]
+allure = { id = "io.qameta.allure", version.ref = "allure" }

@@ -1,0 +1,11 @@
+rootProject.name = 'testTask'
+include 'api-tests'
+
+// settings for version catalogue 'lib.versions.toml'.
+dependencyResolutionManagement {
+    versionCatalogs {
+        libs {
+            from(files("gradle/lib.versions.toml"))
+        }
+    }
+}
