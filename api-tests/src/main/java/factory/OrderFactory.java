@@ -9,9 +9,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class OrderFactory {
-    
+
     private static final Faker faker = new Faker();
-    
+
     public static Order createValidOrder() {
         return new Order()
                 .setId(ThreadLocalRandom.current().nextInt(1, 1000))
@@ -21,47 +21,19 @@ public class OrderFactory {
                 .setStatus(getRandomStatus())
                 .setComplete(faker.bool().bool());
     }
+
+    public static Order createOrderWithInvalidData() {
+        return new Order()
+                .setId(null)
+                .setPetId(-1)
+                .setQuantity(-5)
+                .setShipDate("invalid-date")
+                .setStatus(null)
+                .setComplete(null);
+    }
     
     public static Order createOrderWithPetId(int petId) {
         return createValidOrder().setPetId(petId);
-    }
-    
-    public static Order createOrderWithStatus(OrderStatus status) {
-        return createValidOrder().setStatus(status);
-    }
-    
-    public static Order createOrderWithId(int id) {
-        return createValidOrder().setId(id);
-    }
-    
-    public static Order createOrderWithQuantity(int quantity) {
-        return createValidOrder().setQuantity(quantity);
-    }
-    
-    }
-
-    public static Order createOrderWithNullId() {
-        return createValidOrder().setId(null);
-    }
-
-    public static Order createOrderWithNegativePetId() {
-        return createValidOrder().setPetId(-1);
-    }
-
-    public static Order createOrderWithNegativeQuantity() {
-        return createValidOrder().setQuantity(-5);
-    }
-
-    public static Order createOrderWithInvalidShipDate() {
-        return createValidOrder().setShipDate("invalid-date");
-    }
-
-    public static Order createOrderWithNullStatus() {
-        return createValidOrder().setStatus(null);
-    }
-
-    public static Order createOrderWithNullComplete() {
-        return createValidOrder().setComplete(null);
     }
     
     private static OrderStatus getRandomStatus() {
