@@ -1,4 +1,4 @@
-package com.petstore.api.model.services;
+package com.petstore.api.services;
 
 import com.petstore.api.AssertableResponse;
 import com.petstore.api.model.User;
@@ -24,6 +24,7 @@ public class UserApiService {
     }
 
     // any custom headers might be defined here if needed
+    // POST /user
     public AssertableResponse registerUser(User user) {
         log.info("Register user {}", user);
 

@@ -24,4 +24,10 @@ public class AssertableResponse {
         }
         return this;
     }
+    
+    // Parse value with type
+    public <T> T parseValue(String jsonPath, Class<T> type) {
+        log.info("Extracting {} value from path: {}", type.getSimpleName(), jsonPath);
+        return response.extract().path(jsonPath);
+    }
 }
