@@ -1,7 +1,7 @@
 package factory;
 
 import com.github.javafaker.Faker;
-import model.User;
+import com.petstore.api.model.User;
 
 import java.util.concurrent.ThreadLocalRandom;
 

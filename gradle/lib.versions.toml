@@ -7,6 +7,7 @@ jacksonDatabind = "2.18.0"
 logback = "1.5.18"
 slf4j = "2.0.16"
 javafaker = "1.0.2"
+allure-rest-assured = "2.25.0"
 
 
 [libraries]
@@ -39,6 +40,10 @@ restAssured = { module = "io.rest-assured:rest-assured", version.ref = "rest-ass
 # https://mvnrepository.com/artifact/com.github.javafaker/javafaker
 # Java library for generating fake data
 javafaker = { module = "com.github.javafaker:javafaker", version.ref = "javafaker" }
+
+# https://mvnrepository.com/artifact/io.qameta.allure/allure-rest-assured
+# Allure RestAssured integration
+allureRestAssured = { module = "io.qameta.allure:allure-rest-assured", version.ref = "allure-rest-assured" }
 
 [plugins]
 allure = { id = "io.qameta.allure", version.ref = "allure" }

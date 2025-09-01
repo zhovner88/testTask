@@ -1,4 +1,4 @@
-package model;
+package com.petstore.api.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;

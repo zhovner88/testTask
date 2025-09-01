@@ -20,9 +20,18 @@ dependencies {
     
     testImplementation libs.junit.jupiter.api
     testImplementation libs.junit.jupiter.engine
+    implementation libs.allureRestAssured
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 test {
     useJUnitPlatform()
+}
+
+allure {
+    version = '2.25.0'
+
+    useJUnit5 {
+        version = '2.25.0'
+    }
 }

@@ -1,14 +1,14 @@
 package com.petstore.tests;
 
+import com.petstore.api.conditions.Conditions;
 import factory.UserFactory;
 import io.restassured.RestAssured;
-import model.User;
+import com.petstore.api.model.User;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import services.UserApiService;
+import com.petstore.api.model.services.UserApiService;
 
-import static org.hamcrest.Matchers.emptyString;
-import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.notNullValue;
 
 public class PetTests {
     @BeforeAll
@@ -16,7 +16,7 @@ public class PetTests {
         RestAssured.baseURI = "https://petstore.swagger.io/v2";
     }
 
-    private UserApiService apiService = new UserApiService();
+    private final UserApiService apiService = new UserApiService();
 
     @Test
     void testCanCreateUserWishlist() {
@@ -25,8 +25,8 @@ public class PetTests {
 
         // expect
         apiService.registerUser(user)
-                .assertThat()
-                .body("id", not(emptyString()));
+                .shouldHave(Conditions.statusCode(200))
+                .shouldHave(Conditions.bodyField("message", notNullValue()));
 
     }
 }
