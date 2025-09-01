@@ -38,14 +38,30 @@ public class OrderFactory {
         return createValidOrder().setQuantity(quantity);
     }
     
-    public static Order createOrderWithInvalidData() {
-        return new Order()
-                .setId(null)
-                .setPetId(-1)
-                .setQuantity(-5)
-                .setShipDate("invalid-date")
-                .setStatus(null)
-                .setComplete(null);
+    }
+
+    public static Order createOrderWithNullId() {
+        return createValidOrder().setId(null);
+    }
+
+    public static Order createOrderWithNegativePetId() {
+        return createValidOrder().setPetId(-1);
+    }
+
+    public static Order createOrderWithNegativeQuantity() {
+        return createValidOrder().setQuantity(-5);
+    }
+
+    public static Order createOrderWithInvalidShipDate() {
+        return createValidOrder().setShipDate("invalid-date");
+    }
+
+    public static Order createOrderWithNullStatus() {
+        return createValidOrder().setStatus(null);
+    }
+
+    public static Order createOrderWithNullComplete() {
+        return createValidOrder().setComplete(null);
     }
     
     private static OrderStatus getRandomStatus() {
