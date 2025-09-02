@@ -24,7 +24,7 @@ public class OrderFactory {
 
     // Individual field validation methods - each tests one specific field
     
-    public static Order createOrderWithInvalidId() {
+    public static Order createOrderWithIdNullValue() {
         return createValidOrder().setId(null);
     }
     

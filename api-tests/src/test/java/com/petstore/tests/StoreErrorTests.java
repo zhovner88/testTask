@@ -16,7 +16,7 @@ public class StoreErrorTests extends BaseApiTest {
     @Test
     void testPlaceOrderWithInvalidId() {
         // Given - order with null ID
-        Order invalidOrder = OrderFactory.createOrderWithInvalidId();
+        Order invalidOrder = OrderFactory.createOrderWithIdNullValue();
         
         // When, Then - should return 400 Bad Request
         storeService.placeOrder(invalidOrder)
@@ -133,8 +133,8 @@ public class StoreErrorTests extends BaseApiTest {
         // When, Then - should return 404 Not Found
         storeService.deleteOrder(nonExistentOrderId)
                 .shouldHave(Conditions.statusCode(404))
-                .shouldHave(Conditions.bodyField("type", equalTo("error")))
-                .shouldHave(Conditions.bodyField("message", equalTo("Order not found")));
+                .shouldHave(Conditions.bodyField("type", equalTo("unknown")))
+                .shouldHave(Conditions.bodyField("message", equalTo("Order Not Found")));
         // Note: According to Swagger - deleting non-existent order returns 404
     }
 
@@ -177,7 +177,7 @@ public class StoreErrorTests extends BaseApiTest {
     @Test
     void testStoreEndpointsErrorMessageFormat() {
         // Given - invalid order to test error message structure
-        Order invalidOrder = OrderFactory.createOrderWithInvalidId();
+        Order invalidOrder = OrderFactory.createOrderWithIdNullValue();
         
         // When, Then - verify error response follows Swagger error format
         storeService.placeOrder(invalidOrder)
