@@ -3,6 +3,7 @@
     <test name="Store API Tests">
         <classes>
             <class name="com.petstore.tests.StoreTests"/>
+            <class name="com.petstore.tests.StoreEdgeCasesTests"/>
             <class name="com.petstore.tests.PetTests"/>
         </classes>
     </test>

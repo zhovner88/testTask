@@ -51,26 +51,72 @@ public class StoreTests extends BaseApiTest {
                 .shouldHave(Conditions.bodyField("status", notNullValue()));
     }
 
+    @Test
+    void testPlaceOrderWithInvalidStatus() {
+        // Given - create order with null status (invalid)
+        Order order = OrderFactory.createOrderWithNullStatus();
+
+        // When, Then - place order with null status should fail
+        storeService.placeOrder(order)
+                .shouldHave(Conditions.statusCode(400));
+        // Note: Null status should be rejected by API validation
+    }
+
     @Test 
-    void testPlaceOrderWithInvalidData() {
-        // Given - order with invalid data
-        Order invalidOrder = OrderFactory.createOrderWithInvalidData();
+    void testPlaceOrderWithInvalidId() {
+        // Given - order with null ID
+        Order invalidOrder = OrderFactory.createOrderWithInvalidId();
         
         // When, Then
         storeService.placeOrder(invalidOrder)
                 .shouldHave(Conditions.statusCode(400));
+        // Note: Null ID should be rejected
     }
-
-    @Test
-    void testPlaceOrderWithInvalidPetId() {
-        // Given
-        Order order = OrderFactory.createOrderWithPetId(-1);
+    
+    @Test 
+    void testPlaceOrderWithNegativePetId() {
+        // Given - order with negative petId
+        Order invalidOrder = OrderFactory.createOrderWithNegativePetId();
         
         // When, Then
-        storeService.placeOrder(order)
+        storeService.placeOrder(invalidOrder)
                 .shouldHave(Conditions.statusCode(400));
-        // Note: Simplified - expecting 400 for invalid petId
+        // Note: Negative petId should be rejected
     }
+    
+    @Test 
+    void testPlaceOrderWithNegativeQuantity() {
+        // Given - order with negative quantity
+        Order invalidOrder = OrderFactory.createOrderWithNegativeQuantity();
+        
+        // When, Then
+        storeService.placeOrder(invalidOrder)
+                .shouldHave(Conditions.statusCode(400));
+        // Note: Negative quantity should be rejected
+    }
+    
+    @Test 
+    void testPlaceOrderWithInvalidDate() {
+        // Given - order with invalid date format
+        Order invalidOrder = OrderFactory.createOrderWithInvalidDate();
+        
+        // When, Then
+        storeService.placeOrder(invalidOrder)
+                .shouldHave(Conditions.statusCode(400));
+        // Note: Invalid date format should be rejected
+    }
+    
+    @Test 
+    void testPlaceOrderWithNullStatus() {
+        // Given - order with null status
+        Order invalidOrder = OrderFactory.createOrderWithNullStatus();
+        
+        // When, Then
+        storeService.placeOrder(invalidOrder)
+                .shouldHave(Conditions.statusCode(400));
+        // Note: Null status should be rejected
+    }
+
 
     @Test
     void testGetOrderByValidId() {

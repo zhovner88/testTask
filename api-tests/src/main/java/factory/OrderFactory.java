@@ -22,18 +22,28 @@ public class OrderFactory {
                 .setComplete(faker.bool().bool());
     }
 
-    // TO-DO. Add validations for each field, instead of  whole request. It's not clear what can go wrong
-    // add each field test independently
-    public static Order createOrderWithInvalidData() {
-        return new Order()
-                .setId(null)
-                .setPetId(-1)
-                .setQuantity(-5)
-                .setShipDate("invalid-date")
-                .setStatus(null)
-                .setComplete(null);
+    // Individual field validation methods - each tests one specific field
+    
+    public static Order createOrderWithInvalidId() {
+        return createValidOrder().setId(null);
     }
     
+    public static Order createOrderWithNegativePetId() {
+        return createValidOrder().setPetId(-1);
+    }
+    
+    public static Order createOrderWithNegativeQuantity() {
+        return createValidOrder().setQuantity(-5);
+    }
+    
+    public static Order createOrderWithInvalidDate() {
+        return createValidOrder().setShipDate("invalid-date-format");
+    }
+    
+    public static Order createOrderWithNullStatus() {
+        return createValidOrder().setStatus(null);
+    }
+
     public static Order createOrderWithPetId(int petId) {
         return createValidOrder().setPetId(petId);
     }
