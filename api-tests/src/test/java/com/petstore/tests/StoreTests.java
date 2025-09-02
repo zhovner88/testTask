@@ -4,7 +4,7 @@ import com.petstore.api.conditions.Conditions;
 import com.petstore.api.model.Order;
 import common.Constants;
 import factory.OrderFactory;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 import utils.Utils;
 
 import static org.hamcrest.Matchers.*;

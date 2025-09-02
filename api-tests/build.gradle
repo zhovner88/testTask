@@ -18,22 +18,20 @@ dependencies {
     implementation libs.slf4j.ext
     implementation libs.javafaker
     
-    testImplementation libs.junit.jupiter.api
-    testImplementation libs.junit.jupiter.engine
+    testImplementation libs.testng
     implementation libs.allureRestAssured
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 test {
-    useJUnitPlatform()
+    useTestNG() {
+        parallel = 'methods'
+        threadCount = Runtime.runtime.availableProcessors()
+        outputDirectory = layout.buildDirectory.dir("test-output").get().asFile
+        useDefaultListeners = true
+    }
     
-    // Parallel tests execution
+    // TestNG parallel execution configuration
     maxParallelForks = Runtime.runtime.availableProcessors()
-
-    systemProperty 'junit.jupiter.execution.parallel.enabled', 'true'
-    systemProperty 'junit.jupiter.execution.parallel.mode.default', 'concurrent'
-    systemProperty 'junit.jupiter.execution.parallel.mode.classes.default', 'concurrent'
-    systemProperty 'junit.jupiter.execution.parallel.config.strategy', 'dynamic'
     
     // HTML reports configuration
     reports {
@@ -46,15 +44,15 @@ test {
 allure {
     version = '2.25.0'
 
-    useJUnit5 {
+    useTestNG {
         version = '2.25.0'
     }
 }
 
-// Task to open HTML test report in browser
+// Task to open HTML test report in browser (Gradle built-in)
 tasks.register('showHtmlReport') {
     group = 'verification'
-    description = 'Opens HTML test report in default browser'
+    description = 'Opens Gradle HTML test report in default browser'
     
     doLast {
         def reportFile = layout.buildDirectory.file("reports${File.separator}tests${File.separator}html${File.separator}index.html").get().asFile
@@ -73,9 +71,38 @@ tasks.register('showHtmlReport') {
                     commandLine 'xdg-open', reportFile.absolutePath
                 }
             }
-            println "Opening HTML report: ${reportFile.absolutePath}"
+            println "Opening Gradle HTML report: ${reportFile.absolutePath}"
         } else {
             println "HTML report not found. Run tests first with: ./gradlew test"
+        }
+    }
+}
+
+// Task to open TestNG HTML report in browser  
+tasks.register('showTestNGReport') {
+    group = 'verification'
+    description = 'Opens TestNG HTML report in default browser'
+    
+    doLast {
+        def testNGReportFile = layout.buildDirectory.file("test-output${File.separator}index.html").get().asFile
+        
+        if (testNGReportFile.exists()) {
+            if (System.getProperty('os.name').toLowerCase().contains('mac')) {
+                project.exec {
+                    commandLine 'open', testNGReportFile.absolutePath
+                }
+            } else if (System.getProperty('os.name').toLowerCase().contains('win')) {
+                project.exec {
+                    commandLine 'cmd', '/c', 'start', '""', testNGReportFile.absolutePath
+                }
+            } else {
+                project.exec {
+                    commandLine 'xdg-open', testNGReportFile.absolutePath
+                }
+            }
+            println "Opening TestNG HTML report: ${testNGReportFile.absolutePath}"
+        } else {
+            println "TestNG HTML report not found. Run tests first with: ./gradlew test"
         }
     }
 }

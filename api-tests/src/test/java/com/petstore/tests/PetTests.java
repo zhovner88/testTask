@@ -3,15 +3,13 @@ package com.petstore.tests;
 import com.petstore.api.conditions.Conditions;
 import com.petstore.api.model.User;
 import factory.UserFactory;
-import org.junit.jupiter.api.Disabled;
-import org.junit.jupiter.api.Test;
+import org.testng.annotations.Test;
 
 import static org.hamcrest.Matchers.notNullValue;
 
 public class PetTests extends BaseApiTest {
 
-    @Test
-    @Disabled
+    @Test(enabled = false)
     void testCanCreateUserWishlist() {
         // given
         User user = UserFactory.createRandomUser();

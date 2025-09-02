@@ -10,7 +10,7 @@ This is a Gradle-based Java project designed for REST API testing, specifically 
 
 - **Root Project**: `testTask` - Main project container
 - **Submodule**: `api-tests` - Contains all API test implementations
-- **Test Framework**: JUnit 5 (Jupiter) with JUnit Platform
+- **Test Framework**: TestNG with parallel execution support
 - **Build Tool**: Gradle with wrapper (gradlew)
 
 ## Common Commands
@@ -43,6 +43,15 @@ This is a Gradle-based Java project designed for REST API testing, specifically 
 
 # Generate test reports
 ./gradlew test --info
+
+# Open Gradle HTML test report in browser
+./gradlew showHtmlReport
+
+# Open TestNG HTML test report in browser  
+./gradlew showTestNGReport
+
+# Generate Allure report
+./gradlew allureServe
 ```
 
 ## Project Structure
@@ -65,10 +74,11 @@ testTask/
 
 ## Key Configuration
 
-- **Java Version**: Uses default JVM (check project requirements)
-- **JUnit Version**: 5.10.0 with BOM platform management
+- **Java Version**: Java 17 (source and target compatibility)
+- **TestNG Version**: 7.8.0 with parallel execution support
 - **Repository**: Maven Central for dependencies
-- **Test Runner**: JUnit Platform with Jupiter engine
+- **Test Runner**: TestNG with methods-level parallelism
+- **Parallel Execution**: Methods run in parallel using available CPU cores
 
 ## Development Notes
 
@@ -76,4 +86,8 @@ testTask/
 - Shared test utilities and base classes should be placed in `api-tests/src/main/java`
 - Configuration files and test data should be stored in respective `resources` directories
 - The project uses Gradle's standard directory layout
-- JUnit 5 is configured as the testing framework with platform launcher
+- TestNG is configured as the testing framework with parallel execution
+- TestNG configuration file: `api-tests/src/test/resources/testng.xml`
+- Use `@Test` annotations from `org.testng.annotations.Test`
+- Use `@BeforeClass` instead of JUnit's `@BeforeAll`
+- Use `@Test(enabled = false)` instead of JUnit's `@Disabled`

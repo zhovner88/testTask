@@ -1,6 +1,6 @@
 [versions]
-# --- JUNIT ---
-junit = "5.10.0"
+# --- TestNG ---
+testng = "7.8.0"
 rest-assured = "5.5.0"
 allure = "2.11.2"
 jacksonDatabind = "2.18.0"
@@ -11,12 +11,9 @@ allure-rest-assured = "2.25.0"
 
 
 [libraries]
-# https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api
-# JUnit Jupiter is the API for writing tests using JUnit 5.
-junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit" }
-# https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-engine
-# Core package for the JUnit Jupiter test engine.
-junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit" }
+# https://mvnrepository.com/artifact/org.testng/testng
+# TestNG testing framework
+testng = { module = "org.testng:testng", version.ref = "testng" }
 
 # https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind
 # Easy objecst serialization
