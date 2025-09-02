@@ -48,6 +48,11 @@ public class OrderFactory {
         return createValidOrder().setPetId(petId);
     }
     
+    public static Order createOrderWithXssInDate() {
+        return createValidOrder()
+                .setShipDate("<script>alert('xss')</script>");
+    }
+    
     private static OrderStatus getRandomStatus() {
         OrderStatus[] statuses = OrderStatus.values();
         return statuses[ThreadLocalRandom.current().nextInt(statuses.length)];

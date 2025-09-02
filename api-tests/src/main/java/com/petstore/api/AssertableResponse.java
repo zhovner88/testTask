@@ -30,4 +30,14 @@ public class AssertableResponse {
         log.info("Extracting {} value from path: {}", type.getSimpleName(), jsonPath);
         return response.extract().path(jsonPath);
     }
+    
+    // Get status code
+    public int getStatusCode() {
+        return response.extract().statusCode();
+    }
+    
+    // Get response body as string
+    public String getResponseBody() {
+        return response.extract().asString();
+    }
 }

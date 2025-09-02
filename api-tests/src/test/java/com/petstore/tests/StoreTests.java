@@ -53,12 +53,23 @@ public class StoreTests extends BaseApiTest {
     @Test
     void testGetOrderByValidId() {
         // Given - using ID in valid ID range (1-10)
-        int validOrderId = 5;
+        int validOrderId = Constants.VALID_ORDER_ID_FOR_TESTING;
         
         // When, Then
         storeService.getOrderById(validOrderId)
                 .shouldHave(Conditions.statusCode(200));
         // Note: might return 404 if order doesn't exist, which is also valid
+    }
+
+    @Test
+    void testGetOrderByUpperBoundaryId() {
+        // Given - using upper boundary ID (according to Swagger spec: valid range 1-10)
+        int upperBoundaryId = Constants.ORDER_ID_UPPER_LIMIT;
+        
+        // When, Then
+        storeService.getOrderById(upperBoundaryId)
+                .shouldHave(Conditions.statusCode(200));
+        // Note: ID=10 is within valid range, might return 404 if order doesn't exist
     }
 
     @Test

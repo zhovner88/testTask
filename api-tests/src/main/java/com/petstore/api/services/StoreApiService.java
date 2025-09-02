@@ -8,9 +8,9 @@ import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import lombok.extern.slf4j.XSlf4j;
+import lombok.extern.slf4j.Slf4j;
 
-@XSlf4j
+@Slf4j
 public class StoreApiService {
 
     public RequestSpecification setUpRequest() {
