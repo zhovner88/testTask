@@ -2,7 +2,6 @@ package com.petstore.tests.pet;
 
 import com.petstore.api.conditions.Conditions;
 import com.petstore.api.model.User;
-import com.petstore.tests.store.BaseStoreApiTest;
 import factory.UserFactory;
 import org.testng.annotations.Test;
 
