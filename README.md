@@ -34,11 +34,6 @@ testTask/                    # Root project
 - **Factory Pattern** - генерація тестових даних (OrderFactory, UserFactory)
 - **Паралельне виконання** - TestNG methods-level parallelism
 
-### Покриття тестів
-- **StoreTests** - основні CRUD операції
-- **StoreEdgeCasesTests** - граничні випадки
-- **StoreErrorTests** - обробка помилок та validation
-
 ## Завантажити проект
 
 ```bash
@@ -103,7 +98,7 @@ API повертає помилки у форматі:
 
 ## Відомі обмеження
 
-1. **Shared Environment** - використовується спільне тестове середовище
+1. Shared Environment - використовується спільне тестове середовище
 2. При переміщені тестових класів в окремі модулі, BASE_URL ініціалізується як localhost
 
 ## Gradle Tasks
@@ -118,7 +113,7 @@ API повертає помилки у форматі:
 - `build` - Build project
 - `clean` - Clean build artifacts
 
-## Розширення
+## Розширення фреймворку та додавання нових тестів:
 
 - **Нові тести**: додати в `api-tests/src/test/java/com/petstore/tests/`
 - **Нові API services**: створити в `api-tests/src/main/java/com/petstore/api/services/`
@@ -129,3 +124,52 @@ API повертає помилки у форматі:
 **Вимоги**: Java 17+ (з вищими версіями будуть проблеми із сумісністю бібліотек, міграція на Java 21+ наприклад), Gradle 7.0+
 
 **Version Catalog**: `gradle/lib.versions.toml` - централізоване управління залежностями
+
+
+
+### Керування тестовими даними через автоматизовану генерацію POJO класів:
+
+RoboPOJOGenerator: Правий клік → New → Generate POJO from JSON
+Оптимізація: Генеруються тільки поля, Lombok забезпечує getters/setters
+Налаштування: Обов'язково увімкнути "Enable annotation processing" в IntelliJ.
+
+**Custom Conditions**
+Гнучкий підхід для складних сценарієв з покращеним логуванням:
+
+**CI/CD інтеграція:** Кожна перевірка окремо в консольних логах
+Інформативність: 'Body field '%s' should match %s' - зрозуміло що перевіряється
+Розширюваність: Додаткові метрики + логування для non-technical users
+Переваги над Rest Assured: Детальніше логування кожної перевірки
+
+### Покриття тестів
+- **StoreTests** - основні CRUD операції
+- **StoreEdgeCasesTests** - граничні випадки
+- **StoreErrorTests** - обробка помилок та validation
+
+### Test Design Strategy
+
+**GET /store/inventory:**
+
+- Позитивні: валідний API key, структура відповіді, performance
+- Негативні: відсутність/невалідний API key, некоректні headers
+
+**POST /store/order:**
+
+* Позитивні: валідні дані, різні статуси (placed/approved/delivered), мінімальні поля
+* Негативні: відсутні поля, неіснуючий petId, некоректні enum значення
+* Edge cases: граничні значення quantity, спеціальні символи
+
+**GET /store/order/{orderId}:**
+
+* Boundary focus: ID діапазон 1-10 (згідно API документації)
+* Позитивні: валідні ID в межах діапазону
+* Негативні: ID поза діапазоном (0, 11+), неіснуючі ID
+
+**DELETE /store/order/{orderId}:**
+
+* Позитивні: видалення існуючих orders
+* Негативні: негативні ID, неіснуючі orders, повторне видалення
+
+**Integration Testing:**
+
+Lifecycle тести: POST → GET → DELETE → GET(404)
