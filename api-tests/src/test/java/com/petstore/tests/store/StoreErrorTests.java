@@ -1,4 +1,4 @@
-package com.petstore.tests;
+package com.petstore.tests.store;
 
 import com.petstore.api.conditions.Conditions;
 import com.petstore.api.model.Order;
@@ -9,7 +9,7 @@ import utils.Utils;
 
 import static org.hamcrest.Matchers.*;
 
-public class StoreErrorTests extends BaseApiTest {
+public class StoreErrorTests extends BaseStoreApiTest {
 
     // Priority 3 Tests: Error Handling Tests - Swagger API error codes validation
 

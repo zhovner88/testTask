@@ -23,7 +23,10 @@ testTask/                    # Root project
 │   │   ├── common/         # Constants
 │   │   └── utils/          # Utilities
 │   └── src/test/java/
-│       └── com/petstore/tests/ # Test classes
+│       └── com/petstore/tests/ 
+│           ├── store/      # Store API tests (organized by domain)
+│           ├── BaseApiTest.java # Base test class
+│           └── PetTests.java    # Pet API tests
 ├── gradle/lib.versions.toml    # Version catalog
 └── settings.gradle             # Multi-module config
 ```
@@ -69,12 +72,6 @@ cd testTask
 
 ## Конфігурація
 
-### Constants.java
-```java
-public static final String BASE_URI = "https://petstore.swagger.io/v2";
-public static final String SPECIAL_API_KEY = "special-key";
-```
-
 ### TestNG паралельне виконання тестів 
 - Methods-level parallelism
 - Thread count = доступні CPU cores
@@ -96,10 +93,9 @@ API повертає помилки у форматі:
 }
 ```
 
-## Відомі обмеження
+## Відомі проблеми 
 
-1. Shared Environment - використовується спільне тестове середовище
-2. При переміщені тестових класів в окремі модулі, BASE_URL ініціалізується як localhost
+1. ~~При переміщені тестових класів в окремі модулі, BASE_URL ініціалізується як localhost~~ - **Вирішено**: змінено static @BeforeClass на non-static
 
 ## Gradle Tasks
 
@@ -142,9 +138,15 @@ RoboPOJOGenerator: Правий клік → New → Generate POJO from JSON
 Переваги над Rest Assured: Детальніше логування кожної перевірки
 
 ### Покриття тестів
-- **StoreTests** - основні CRUD операції
-- **StoreEdgeCasesTests** - граничні випадки
-- **StoreErrorTests** - обробка помилок та validation
+#### Store API:
+- **StoreTests** - основні CRUD операції (store/)
+- **StoreEdgeCasesTests** - граничні випадки та boundary testing
+- **StoreErrorTests** - обробка помилок, validation, security tests
+
+#### Security Testing:
+- **SQL Injection** - тести на SQL injection в order ID параметрах
+- **XSS Testing** - перевірка обробки небезпечних скриптів в даних замовлень
+- **Input Validation** - тести на некоректні типи даних та граничні значення
 
 ### Test Design Strategy
 
@@ -173,3 +175,4 @@ RoboPOJOGenerator: Правий клік → New → Generate POJO from JSON
 **Integration Testing:**
 
 Lifecycle тести: POST → GET → DELETE → GET(404)
+Повна інтеграція Store API workflow з перевіркою consistency даних

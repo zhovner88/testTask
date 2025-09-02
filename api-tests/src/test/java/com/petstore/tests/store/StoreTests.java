@@ -1,4 +1,4 @@
-package com.petstore.tests;
+package com.petstore.tests.store;
 
 import com.petstore.api.conditions.Conditions;
 import com.petstore.api.model.Order;
@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
 import static org.hamcrest.Matchers.*;
 
-public class StoreTests extends BaseApiTest {
+public class StoreTests extends BaseStoreApiTest {
 
     // Priority 1 Tests: Critical functionality
 

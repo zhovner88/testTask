@@ -2,10 +2,10 @@
 <suite name="PetStore API Tests" parallel="methods" thread-count="4">
     <test name="Store API Tests">
         <classes>
-            <class name="com.petstore.tests.StoreTests"/>
-            <class name="com.petstore.tests.StoreEdgeCasesTests"/>
-            <class name="com.petstore.tests.StoreErrorTests"/>
-            <class name="com.petstore.tests.PetTests"/>
+            <class name="com.petstore.tests.store.StoreTests"/>
+            <class name="com.petstore.tests.store.StoreEdgeCasesTests"/>
+            <class name="com.petstore.tests.store.StoreErrorTests"/>
+            <class name="com.petstore.tests.pet.PetTests"/>
         </classes>
     </test>
 </suite>

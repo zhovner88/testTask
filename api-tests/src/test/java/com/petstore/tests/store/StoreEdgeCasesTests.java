@@ -1,4 +1,4 @@
-package com.petstore.tests;
+package com.petstore.tests.store;
 
 import com.petstore.api.conditions.Conditions;
 import com.petstore.api.model.Order;
@@ -11,7 +11,7 @@ import java.time.format.DateTimeFormatter;
 
 import static org.hamcrest.Matchers.*;
 
-public class StoreEdgeCasesTests extends BaseApiTest {
+public class StoreEdgeCasesTests extends BaseStoreApiTest {
 
     // Priority 2 Tests - Edge cases and integration scenarios
 
