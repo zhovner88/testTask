@@ -34,6 +34,13 @@ test {
     systemProperty 'junit.jupiter.execution.parallel.mode.default', 'concurrent'
     systemProperty 'junit.jupiter.execution.parallel.mode.classes.default', 'concurrent'
     systemProperty 'junit.jupiter.execution.parallel.config.strategy', 'dynamic'
+    
+    // HTML reports configuration
+    reports {
+        html.required = true
+        html.outputLocation = layout.buildDirectory.dir("reports${File.separator}tests${File.separator}html")
+        junitXml.required = true
+    }
 }
 
 allure {
@@ -41,5 +48,34 @@ allure {
 
     useJUnit5 {
         version = '2.25.0'
+    }
+}
+
+// Task to open HTML test report in browser
+tasks.register('showHtmlReport') {
+    group = 'verification'
+    description = 'Opens HTML test report in default browser'
+    
+    doLast {
+        def reportFile = layout.buildDirectory.file("reports${File.separator}tests${File.separator}html${File.separator}index.html").get().asFile
+        
+        if (reportFile.exists()) {
+            if (System.getProperty('os.name').toLowerCase().contains('mac')) {
+                project.exec {
+                    commandLine 'open', reportFile.absolutePath
+                }
+            } else if (System.getProperty('os.name').toLowerCase().contains('win')) {
+                project.exec {
+                    commandLine 'cmd', '/c', 'start', '""', reportFile.absolutePath
+                }
+            } else {
+                project.exec {
+                    commandLine 'xdg-open', reportFile.absolutePath
+                }
+            }
+            println "Opening HTML report: ${reportFile.absolutePath}"
+        } else {
+            println "HTML report not found. Run tests first with: ./gradlew test"
+        }
     }
 }

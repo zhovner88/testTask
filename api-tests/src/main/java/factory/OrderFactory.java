@@ -22,6 +22,8 @@ public class OrderFactory {
                 .setComplete(faker.bool().bool());
     }
 
+    // TO-DO. Add validations for each field, instead of  whole request. It's not clear what can go wrong
+    // add each field test independently
     public static Order createOrderWithInvalidData() {
         return new Order()
                 .setId(null)
