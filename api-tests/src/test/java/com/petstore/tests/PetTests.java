@@ -1,13 +1,14 @@
-package com.petstore.tests.pet;
+package com.petstore.tests;
 
 import com.petstore.api.conditions.Conditions;
 import com.petstore.api.model.User;
+import common.Constants;
 import factory.UserFactory;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.Matchers.notNullValue;
 
-public class PetTests extends BasePetApiTest {
+public class PetTests extends BaseApiTest {
 
     @Test(enabled = false)
     void testCanCreateUserWishlist() {
@@ -16,7 +17,7 @@ public class PetTests extends BasePetApiTest {
 
         // expect
         userApiService.registerUser(user)
-                .shouldHave(Conditions.statusCode(200))
+                .shouldHave(Conditions.statusCode(Constants.HTTP_OK))
                 .shouldHave(Conditions.bodyField("message", notNullValue()));
 
     }

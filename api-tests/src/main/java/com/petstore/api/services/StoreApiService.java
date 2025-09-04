@@ -7,7 +7,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class StoreApiService extends BaseApiService {
 
-    // GET /store/inventory
     public AssertableResponse getInventory() {
         log.info("Get store inventory");
         
@@ -26,7 +25,6 @@ public class StoreApiService extends BaseApiService {
                 .then());
     }
 
-    // POST /store/order
     public AssertableResponse placeOrder(Order order) {
         log.info("Place order: {}", order);
 
@@ -37,7 +35,6 @@ public class StoreApiService extends BaseApiService {
                 .then());
     }
 
-    // GET /store/order/{orderId}
     public AssertableResponse getOrderById(int orderId) {
         log.info("Get order by ID: {}", orderId);
 
@@ -48,7 +45,6 @@ public class StoreApiService extends BaseApiService {
                 .then());
     }
 
-    // DELETE /store/order/{orderId}
     public AssertableResponse deleteOrder(int orderId) {
         log.info("Delete order by ID: {}", orderId);
 
