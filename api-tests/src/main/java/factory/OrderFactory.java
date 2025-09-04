@@ -44,10 +44,6 @@ public class OrderFactory {
         return createValidOrder().setStatus(null);
     }
 
-    public static Order createOrderWithPetId(int petId) {
-        return createValidOrder().setPetId(petId);
-    }
-    
     public static Order createOrderWithXssInDate() {
         return createValidOrder()
                 .setShipDate("<script>alert('xss')</script>");

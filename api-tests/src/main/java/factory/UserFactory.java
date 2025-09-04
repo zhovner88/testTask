@@ -19,16 +19,5 @@ public class UserFactory {
                 .setPhone(faker.phoneNumber().cellPhone())
                 .setUserStatus(ThreadLocalRandom.current().nextInt(0, 3));
     }
-    
-    public static User createUserWithId(int id) {
-        return createRandomUser().setId(id);
-    }
-    
-    public static User createUserWithEmail(String email) {
-        return createRandomUser().setEmail(email);
-    }
-    
-    public static User createUserWithFirstName(String firstName) {
-        return createRandomUser().setFirstName(firstName);
-    }
+
 }
