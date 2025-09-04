@@ -2,7 +2,6 @@ package com.petstore.tests;
 
 import com.petstore.api.conditions.Conditions;
 import com.petstore.api.model.Order;
-import com.petstore.tests.BaseApiTest;
 import common.Constants;
 import factory.OrderFactory;
 import org.testng.annotations.Test;

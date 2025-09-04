@@ -12,10 +12,8 @@ public class PetTests extends BaseApiTest {
 
     @Test(enabled = false)
     void testCanCreateUserWishlist() {
-        // given
         User user = UserFactory.createRandomUser();
 
-        // expect
         userApiService.registerUser(user)
                 .shouldHave(Conditions.statusCode(Constants.HTTP_OK))
                 .shouldHave(Conditions.bodyField("message", notNullValue()));
