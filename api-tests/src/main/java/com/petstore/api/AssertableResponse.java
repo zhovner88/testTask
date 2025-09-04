@@ -40,4 +40,10 @@ public class AssertableResponse {
     public String getResponseBody() {
         return response.extract().asString();
     }
+    
+    // Map response to DTO object
+    public <T> T as(Class<T> dtoClass) {
+        log.info("Mapping response to {} DTO", dtoClass.getSimpleName());
+        return response.extract().as(dtoClass);
+    }
 }

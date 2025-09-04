@@ -21,10 +21,12 @@ public class StoreEdgeCasesTests extends BaseStoreApiTest {
         Order order = OrderFactory.createValidOrder();
         
         // When - place order
-        int createdOrderId = storeService.placeOrder(order)
+        Order createdOrder = storeService.placeOrder(order)
                 .shouldHave(Conditions.statusCode(200))
                 .shouldHave(Conditions.bodyField("id", notNullValue()))
-                .parseValue("id", Integer.class);
+                .as(Order.class);
+        
+        int createdOrderId = createdOrder.getId();
         
         // And - get the order
         storeService.getOrderById(createdOrderId)
@@ -56,10 +58,12 @@ public class StoreEdgeCasesTests extends BaseStoreApiTest {
         // Given - create and delete an order first
         Order order = OrderFactory.createValidOrder();
         
-        int createdOrderId = storeService.placeOrder(order)
+        Order createdOrder = storeService.placeOrder(order)
                 .shouldHave(Conditions.statusCode(200))
                 .shouldHave(Conditions.bodyField("id", notNullValue()))
-                .parseValue("id", Integer.class);
+                .as(Order.class);
+        
+        int createdOrderId = createdOrder.getId();
         
         // Delete the order first time
         storeService.deleteOrder(createdOrderId)

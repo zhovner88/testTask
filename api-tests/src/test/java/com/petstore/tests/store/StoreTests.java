@@ -47,7 +47,8 @@ public class StoreTests extends BaseStoreApiTest {
                 .shouldHave(Conditions.statusCode(200))
                 .shouldHave(Conditions.bodyField("id", notNullValue()))
                 .shouldHave(Conditions.bodyField("petId", notNullValue()))
-                .shouldHave(Conditions.bodyField("status", notNullValue()));
+                .shouldHave(Conditions.bodyField("status", notNullValue()))
+                .as(Order.class);
     }
 
     @Test
@@ -78,10 +79,12 @@ public class StoreTests extends BaseStoreApiTest {
         Order order = OrderFactory.createValidOrder();
         
         // When, Then
-        int createdOrderId = storeService.placeOrder(order)
+        Order createdOrder = storeService.placeOrder(order)
                 .shouldHave(Conditions.statusCode(200))
                 .shouldHave(Conditions.bodyField("id", notNullValue()))
-                .parseValue("id", Integer.class);
+                .as(Order.class);
+        
+        int createdOrderId = createdOrder.getId();
         
         // When, Then - delete the created order
         storeService.deleteOrder(createdOrderId)
